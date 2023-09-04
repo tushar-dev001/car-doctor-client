@@ -1,9 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import login from '../assets/images/login/login.svg'
 import { useContext } from 'react'
 import { AuthContext } from '../Provider/AuthProvider'
 
 const Login = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  console.log(location);
+  let from = location.state?.from?.pathname || "/"
+  console.log(from);
 
   const {signIn} = useContext(AuthContext)
 
@@ -19,6 +24,8 @@ const Login = () => {
         .then(result =>{
           const user = result.user
           console.log(user);
+
+          navigate(from, {replace: true})
         })
         .then(error =>console.log(error))
     }
