@@ -2,13 +2,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import login from '../assets/images/login/login.svg'
 import { useContext } from 'react'
 import { AuthContext } from '../Provider/AuthProvider'
+import SocialLogin from '../Pages/Shared/SocialLogin/SocialLogin'
 
 const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  console.log(location);
+  // console.log(location);
   let from = location.state?.from?.pathname || "/"
-  console.log(from);
+  // console.log(from);
 
   const {signIn} = useContext(AuthContext)
 
@@ -24,8 +25,8 @@ const Login = () => {
         .then(result =>{
           const user = result.user
           console.log(user);
-
           navigate(from, {replace: true})
+
         })
         .then(error =>console.log(error))
     }
@@ -61,6 +62,8 @@ const Login = () => {
           </div>
           <div>
             <p>Have an account? <span className='font-bold text-orange-500'><Link to='/registration'>Registration</Link></span></p>
+
+            <SocialLogin/>
           </div>
         </form>
       </div>
